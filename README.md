@@ -11,6 +11,12 @@ This is not yet a package so you only need to install the requirerments as speci
 
 `pip install monitoring`
 
+## Necessary Hardware
+- Raspebbery pi
+- Adafruit 
+
 ## How to use
 
 In your Raspberry.pi terminal, run 'python3 temp_reg_p.py
+
+
