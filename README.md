@@ -2,6 +2,7 @@
 
 ## Install
 
+DOES NOT WORK YET
 This is not yet a package so you only need to install the requirerments as specified in requirements.txt
 
 `pip install monitoring`
@@ -23,6 +24,6 @@ Install some dependencies by running:
 ### Running the program
 In your terminal, run `python3 temp_reg_p.py`
 
-## to work on the notebooks using [nbdev](https://nbdev.fast.ai/) to push changes to the remote repository
+### to work on the notebooks using [nbdev](https://nbdev.fast.ai/) to push changes to the remote repository
 Make sure that nbdev is installed by running `pip install nbdev` 
-and install githooks by using `pip nbdev_install_git_hooks`.
+and install githooks by using `nbdev_install_git_hooks`.
