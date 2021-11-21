@@ -1,4 +1,4 @@
-# FairFusion Monitoring - Measuring and Monitoring Temperature
+# Fair-Fusion Monitoring - Measuring and Monitoring Temperature
 
 ## Install
 
