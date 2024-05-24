@@ -18,7 +18,7 @@ water_supply_status = settings['water_supply_status']
 #write the sensor values to the csv file
 #set sensor name (DHT22) and pin number.
 DHT_SENSOR = Adafruit_DHT.DHT22
-DHT_PIN = 4
+DHT_PIN = 7
 #name and set the location of your csv file. The file name is humiditytest.csv.
 file_name = 'monitoring.csv'
 try:
@@ -38,3 +38,5 @@ while True:
         print("Failed to retrieve data from humidity sensor")
     #set time in seconds for every n number of seconds you want to register a temperature reading
     time.sleep(time_interval)
+#some more changes here for the sake of changing something
+#some more changes
