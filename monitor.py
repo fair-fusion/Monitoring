@@ -39,3 +39,4 @@ while True:
     #set time in seconds for every n number of seconds you want to register a temperature reading
     time.sleep(time_interval)
 #some more changes here for the sake of changing something
+#some more changes
