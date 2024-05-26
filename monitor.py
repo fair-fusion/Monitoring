@@ -2,17 +2,17 @@ import pandas as pd
 import os
 import time
 import Adafruit_DHT
-from config import Config #to import the settings file
+# from config import Config #to import the settings file
 
 #import a settings file that contains values for the time interval of the data logging, the heating status, water supply status, batch number, temperature threshold, and an email adress using config.py that imports a json file
-config = Config()
-time_interval = Config.time_interval
-heating_status = Config.heating_status
-water_supply_status = Config.water_supply_status
-threshold = config.threshold
-email_settings = config.email_settings
-fixed_values = config.fixed_values
-batch_number = config.batch_number
+# config = Config()
+# time_interval = Config.time_interval
+# heating_status = Config.heating_status
+# water_supply_status = Config.water_supply_status
+# threshold = config.threshold
+# email_settings = config.email_settings
+# fixed_values = config.fixed_values
+# batch_number = config.batch_number
 
 #set the file name of the csv where the data will be logged. If the file does not exist yet, create a file called 'monitoring.csv'.
 #If the file already exists, the data will be appended to the file.
