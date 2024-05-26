@@ -1,5 +1,21 @@
 #sproeidroger
 
+# Requirements
+csv
+#Batchnummer (1 tot n)
+#datum, tijd, elke 20 seconden (of inteval logging instelbaar manueel)
+#temperatuur extern (omgeving), humiditeit
+#teperatuur tank
+#gewicht tank (comport)
+#status verwarming (instellen manueel)
+#rpm motor - sensor via comport
+#status aanvoer kraan (aan of uit, manueel instellen)
+
+#centrifugeren
+#doseren (instel waarde (e.g., 4l per uur))
+#daadwerkelijke dosis (meet via comport)
+#centrifuge (aan/uit)
+
 # Chapter 1: Equipment check
 # Chapter 2: Data logging
 # Chapter 3: Messaging via e-mail and sms

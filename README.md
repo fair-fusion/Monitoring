@@ -1,48 +1,28 @@
 # Fair-Fusion Monitoring - Measuring and Monitoring Temperature
-Processes need to be monitored 24/7 to understand if there could occur an error in a batch. Also, for quality purposes, one would like to retrace the exact circumstances of a process. 
+Processes of bacteria growth need to be monitored 24/7 to understand if there could occur an error in a batch. Also, for quality purposes, one would like to retrace the exact circumstances of a process. 
 
-This code allows you to set certain parameters for your batch and record all relevant variables per batch process
+This code allows you to set certain parameters for your batch and record all relevant variables per batch process. Monitoring is done using a Raspberry Pi and a Adafruit sensor.
 
-## Install
+## Setup Your Raspberry Pi and Sensor
+Connect the colored cables of the Adafruit with the right pin positions. The yellow pin is important is it is set in the script. By default this is set in position number 7. Have a look here for the various pin locations and their functions: https://osoyoo.com/wp-content/uploads/2017/06/Raspberry-GPIO-Pins_B_plus-1.jpg
 
-DOES NOT WORK YET
-This is not yet a package so you only need to install the requirerments as specified in requirements.txt
-
-`pip install monitoring`
-
-## How to use
-If you haven't done so already, you need to prepare your Raspberry.pi by running the following commands in your terminal (this may take a while):
+If you haven't done so already, you need to prepare your Raspberrypi by running the following commands in your terminal (this may take a while):
 - sudo apt-get update
 - sudo apt-get upgrade
 - sudo apt-get install build-essential python-dev
 
-### Download the Fair-Fusion Repository
-`git clone https://github.com/fair-fusion/monitoring.git`
+## Installation of This Repo
+Create a virtual environment in your repo by running the following command in the terminal of the Rapsberry Pi:
+'python -m venv' 
 
-Go to this folder by using cd. For example `cd Documents/software/monitoring`
+Activate the virtual environment with 'source venv/bin/activate'
+
+Go to the folder to run the project
+'cd Code/Monitoring'
 
 Install some dependencies by running:
-`pip install requirements.txt`
-
-### Running the program
-In your terminal, run `python3 temp_reg_p.py`
+`pip install -r requirements.txt`
 
 ### to work on the notebooks using [nbdev](https://nbdev.fast.ai/) to push changes to the remote repository
 Make sure that nbdev is installed by running `pip install nbdev` 
 and install githooks by using `nbdev_install_git_hooks`.
-
-# Requirements
-csv
-#Batchnummer (1 tot n)
-#datum, tijd, elke 20 seconden (of inteval logging instelbaar manueel)
-#temperatuur extern (omgeving), humiditeit
-#teperatuur tank
-#gewicht tank (comport)
-#status verwarming (instellen manueel)
-#rpm motor - sensor via comport
-#status aanvoer kraan (aan of uit, manueel instellen)
-
-#centrifugeren
-#doseren (instel waarde (e.g., 4l per uur))
-#daadwerkelijke dosis (meet via comport)
-#centrifuge (aan/uit)

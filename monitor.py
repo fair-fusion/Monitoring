@@ -2,15 +2,17 @@ import pandas as pd
 import os
 import time
 import Adafruit_DHT
+from config import Config #to import the settings file
 
-#import a settings file that contains values for the time interval of the data logging, the heating status and water supply status.
-settings = pd.read_csv('settings.csv')
-#set the time interval for the data logging
-time_interval = settings['time_interval']
-#set the heating status
-heating_status = settings['heating_status']
-#set the water supply status
-water_supply_status = settings['water_supply_status']
+#import a settings file that contains values for the time interval of the data logging, the heating status, water supply status, batch number, temperature threshold, and an email adress using config.py that imports a json file
+config = Config()
+time_interval = Config.time_interval
+heating_status = Config.heating_status
+water_supply_status = Config.water_supply_status
+threshold = config.threshold
+email_settings = config.email_settings
+fixed_values = config.fixed_values
+batch_number = config.batch_number
 
 #set the file name of the csv where the data will be logged. If the file does not exist yet, create a file called 'monitoring.csv'.
 #If the file already exists, the data will be appended to the file.
@@ -22,7 +24,7 @@ DHT_PIN = 7
 #name and set the location of your csv file. The file name is humiditytest.csv.
 file_name = 'monitoring.csv'
 try:
-    f = open('file_name', 'a+')
+    f = open(file_name, 'a+')
     if os.stat(file_name).st_size == 0:
             f.write('Date,Time,Temperature,Humidity, Heating Status, Water Supply Status\r\n')
 except:
@@ -38,5 +40,3 @@ while True:
         print("Failed to retrieve data from humidity sensor")
     #set time in seconds for every n number of seconds you want to register a temperature reading
     time.sleep(time_interval)
-#some more changes here for the sake of changing something
-#some more changes
