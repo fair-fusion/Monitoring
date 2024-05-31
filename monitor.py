@@ -15,6 +15,7 @@ DHT_PIN = 7
 
 #Open a txt file called "data_base.txt", if it's already in your folder, if not, create the file with the headers for all the sensor readings
 #Define the headers of the data_base
+data_base = "data_base.txt"
 headers = ["date", "time", "temperature"]
 
 # Check if the file exists
@@ -38,4 +39,4 @@ while True:
     else:
         print("Failed to retrieve data from humidity sensor")
     #set time in seconds for every n number of seconds you want to register a temperature reading
-    time.sleep(threshold_temp)
+    time.sleep(time_interval)
