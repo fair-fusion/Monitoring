@@ -1,42 +1,52 @@
 import pandas as pd
 import os
+import csv
 import time
 import Adafruit_DHT
-# from config import Config #to import the settings file
+from config import Config #import from settings.json the configurations for the monitoring process
 
-#import a settings file that contains values for the time interval of the data logging, the heating status, water supply status, batch number, temperature threshold, and an email adress using config.py that imports a json file
-# config = Config()
-# time_interval = Config.time_interval
-# heating_status = Config.heating_status
-# water_supply_status = Config.water_supply_status
-# threshold = config.threshold
-# email_settings = config.email_settings
-# fixed_values = config.fixed_values
-# batch_number = config.batch_number
+#import and set the values from settings.json
+threshold_temp = Config.threshold_temp
+batch_number = Config.batch_number
+time_interval = Config.time_interval
+data_base = Config.data_base
 
-#set the file name of the csv where the data will be logged. If the file does not exist yet, create a file called 'monitoring.csv'.
-#If the file already exists, the data will be appended to the file.
-#the file contains columns for the date, time, temperature, humidity, heating status, and water supply status.
-#write the sensor values to the csv file
-#set sensor name (DHT22) and pin number.
+#set the pin for the DHT22 sensor to read from 
 DHT_SENSOR = Adafruit_DHT.DHT22
 DHT_PIN = 7
-#name and set the location of your csv file. The file name is humiditytest.csv.
-file_name = 'monitoring.csv'
-try:
-    f = open(file_name, 'a+')
-    if os.stat(file_name).st_size == 0:
-            f.write('Date,Time,Temperature,Humidity, Heating Status, Water Supply Status\r\n')
-except:
-    pass
 
+#open the data base csv file if it's already in your folder, if not, create the file with the headers for all the sensor readings
+# if os.path.exists(data_base):
+#     f = open(data_base, 'a')
+# else:
+#     f = open(data_base, 'w')
+#     f.write('Date,Time,Temperature,Humidity,time_interval')
+
+# Define the file name and headers
+headers = ["temperature", "date", "time", "humidity", "threshold"]
+# Check if the file exists
+if os.path.exists(data_base):
+    print(f"File {data_base} already exists. Appending to it.")
+else:
+    print(f"File {data_base} does not exist. Creating a new one.")
+    with open(data_base, "w", newline="") as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(headers)  # write the headers to the new file
+
+print(f"File {data_base} is ready for use.")
+
+#add the readings of the sensor to the database
+f = open(data_base, 'a')
+
+#set the time interval for the sensor to read the temperature and humidity 
+ 
 while True:
     humidity, temperature = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
     #register temperature, humidity, and the time (hour and minute)
     if humidity is not None and temperature is not None:
-        f.write('{0},{1},{2:0.1f}*C,{3:0.1f}%\r\n'.format(time.strftime('%m/%d/%y'), time.strftime('%H:%M'), temperature, humidity))
-        print("{0},{1},{2:0.1f}*C,{3:0.1f}%\r\n".format(time.strftime('%m/%d/%y'), time.strftime('%H:%M'), temperature, humidity))
+        f.write('{0},{1},{2:0.1f}*C,{3:0.1f}%\r\n'.format(time.strftime('%m/%d/%y'), time.strftime('%H:%M'), temperature, humidity, threshold_temp))
+        print("{0},{1},{2:0.1f}*C,{3:0.1f}%\r\n".format(time.strftime('%m/%d/%y'), time.strftime('%H:%M'), temperature, humidity, threshold_temp ))
     else:
         print("Failed to retrieve data from humidity sensor")
     #set time in seconds for every n number of seconds you want to register a temperature reading
-    time.sleep(time_interval)
+    time.sleep(threshold_temp)

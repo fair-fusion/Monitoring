@@ -1,3 +1,4 @@
+import os
 #Generate a batch number that always adds one number to the last batch number. 
 #Unless, the batchnumber is already given in a settings file
 def batchnr():

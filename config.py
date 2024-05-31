@@ -7,7 +7,7 @@ class Config:
 
     @property
     def threshold(self):
-        return self.settings["threshold"]
+        return self.settings["threshold_temp"]
 
     @property
     def email_settings(self):
