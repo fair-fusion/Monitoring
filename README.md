@@ -23,6 +23,5 @@ Go to the folder to run the project
 Install some dependencies by running:
 `pip install -r requirements.txt`
 
-### to work on the notebooks using [nbdev](https://nbdev.fast.ai/) to push changes to the remote repository
-Make sure that nbdev is installed by running `pip install nbdev` 
-and install githooks by using `nbdev_install_git_hooks`.
+## Run the main script to monitor
+source Code/venv/bin/activate

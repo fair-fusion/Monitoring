@@ -1,6 +1,5 @@
 import pandas as pd
 import os
-import csv
 import time
 import Adafruit_DHT
 from config import Config #import from settings.json the configurations for the monitoring process
@@ -15,31 +14,22 @@ data_base = Config.data_base
 DHT_SENSOR = Adafruit_DHT.DHT22
 DHT_PIN = 7
 
-#open the data base csv file if it's already in your folder, if not, create the file with the headers for all the sensor readings
-# if os.path.exists(data_base):
-#     f = open(data_base, 'a')
-# else:
-#     f = open(data_base, 'w')
-#     f.write('Date,Time,Temperature,Humidity,time_interval')
+#Open a txt file called "data_base.txt", if it's already in your folder, if not, create the file with the headers for all the sensor readings
+#Define the headers of the data_base
+headers = ["date", "time", "temperature"]
 
-# Define the file name and headers
-headers = ["temperature", "date", "time", "humidity", "threshold"]
 # Check if the file exists
-if os.path.exists(data_base):
-    print(f"File {data_base} already exists. Appending to it.")
-else:
-    print(f"File {data_base} does not exist. Creating a new one.")
-    with open(data_base, "w", newline="") as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow(headers)  # write the headers to the new file
-
-print(f"File {data_base} is ready for use.")
+if not os.path.exists(data_base):
+    print(f"File {data_base} already exists. Appending values to it.")
+    # Create the file and write the headers
+    with open(data_base, "w") as f:
+        f.write(",".join(headers) + "\n")
+        print(f"File {data_base} created and appending values to it.")
 
 #add the readings of the sensor to the database
 f = open(data_base, 'a')
 
-#set the time interval for the sensor to read the temperature and humidity 
- 
+#set the time interval for the sensor to read the temperature and humidity  
 while True:
     humidity, temperature = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
     #register temperature, humidity, and the time (hour and minute)
