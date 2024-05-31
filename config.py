@@ -20,11 +20,11 @@ class Config:
     @property
     def batch_number(self):
         return self.settings["batch_number"]
-    
+
     @property
     def time_interval(self):
-        return self.settings["time_interval"]
-    
+        return int(self.settings["time_interval"])  # Ensure it's an integer
+       
     @property
     def data_base(self):
         return self.settings["data_base.txt"]

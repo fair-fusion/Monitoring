@@ -7,6 +7,6 @@
     },
     "fixed_values": ["value1", "value2", "value3"],
     "batch_number": "1",
-    "time_interval": 15, //time in seconds
+    "time_interval": 2, //time in seconds 
     "data_base":"data_base.txt"
 }
