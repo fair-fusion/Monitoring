@@ -17,6 +17,7 @@ DHT_PIN = 7
 #Define the headers of the data_base
 data_base = "data_base.txt"
 headers = ["date", "time", "temperature"]
+#time interval = 2
 
 # Check if the file exists
 if not os.path.exists(data_base):
