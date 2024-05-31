@@ -27,4 +27,4 @@ class Config:
     
     @property
     def data_base(self):
-        return self.settings["data_base"]
+        return self.settings["data_base.txt"]
