@@ -1,30 +1,39 @@
-import os
+#source: https://learn.adafruit.com/dht-humidity-sensing-on-raspberry-pi-with-gdocs-logging/python-setup
+
+# SPDX-FileCopyrightText: 2021 ladyada for Adafruit Industries
+# SPDX-License-Identifier: MIT
+
 import time
-import Adafruit_DHT
+import board
+import adafruit_dht
 
-#set sensor name (DHT22) and pin number.
-DHT_SENSOR = Adafruit_DHT.DHT22
-DHT_PIN = 12
-#name and set the location of your csv file. The file name is humiditytest.csv.
-data_base = 'data_base.txt'
-threshold_temp = 30
-batch_number = 1
-time_interval = 2
+# Initial the dht device, with data pin connected to:
+dhtDevice = adafruit_dht.DHT22(board.D18)
 
-try:
-    f = open('file_name', 'a+')
-    if os.stat(file_name).st_size == 0:
-            f.write('Date,Time,Temperature,Humidity,Batch\r\n')
-except:
-    pass
+# you can pass DHT22 use_pulseio=False if you wouldn't like to use pulseio.
+# This may be necessary on a Linux single board computer like the Raspberry Pi,
+# but it will not work in CircuitPython.
+# dhtDevice = adafruit_dht.DHT22(board.D18, use_pulseio=False)
 
 while True:
-    humidity, temperature = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
-    #register temperature, humidity, and the time (hour and minute)
-    if humidity is not None and temperature is not None:
-        f.write('{0},{1},{2:0.1f}*C,{3:0.1f}%\r\n'.format(time.strftime('%m/%d/%y'), time.strftime('%H:%M:%S'), temperature, humidity, batch_number))
-        print("{0},{1},{2:0.1f}*C,{3:0.1f}%\r\n".format(time.strftime('%m/%d/%y'), time.strftime('%H:%M:%S'), temperature, humidity, batch_number))
-    else:
-        print("Failed to retrieve data from humidity sensor")
-    #set time in seconds for every n number of seconds you want to register a temperature reading
-    time.sleep(time_interval)
+    try:
+        # Print the values to the serial port
+        temperature_c = dhtDevice.temperature
+        temperature_f = temperature_c * (9 / 5) + 32
+        humidity = dhtDevice.humidity
+        print(
+            "Temp: {:.1f} F / {:.1f} C    Humidity: {}% ".format(
+                temperature_f, temperature_c, humidity
+            )
+        )
+
+    except RuntimeError as error:
+        # Errors happen fairly often, DHT's are hard to read, just keep going
+        print(error.args[0])
+        time.sleep(2.0)
+        continue
+    except Exception as error:
+        dhtDevice.exit()
+        raise error
+
+    time.sleep(2.0)
