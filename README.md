@@ -3,13 +3,6 @@ Processes need to be monitored 24/7 to understand if there could occur an error 
 
 This code allows you to set certain parameters for your batch and record all relevant variables per batch process
 
-## Install
-
-DOES NOT WORK YET
-This is not yet a package so you only need to install the requirerments as specified in requirements.txt
-
-`pip install monitoring`
-
 ## How to use
 If you haven't done so already, you need to prepare your Raspberry.pi by running the following commands in your terminal (this may take a while):
 - sudo apt-get update
@@ -19,7 +12,7 @@ If you haven't done so already, you need to prepare your Raspberry.pi by running
 ### Download the Fair-Fusion Repository
 `git clone https://github.com/fair-fusion/monitoring.git`
 
-Go to this folder by using cd. For example `cd Documents/software/monitoring`
+Go to this folder by using cd. For example `cd Software/monitoring`
 
 Install some dependencies by running:
 `pip install requirements.txt`

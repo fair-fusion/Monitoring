@@ -4,7 +4,7 @@ import Adafruit_DHT
 
 #set sensor name (DHT22) and pin number.
 DHT_SENSOR = Adafruit_DHT.DHT22
-DHT_PIN = 7
+DHT_PIN = 12
 #name and set the location of your csv file. The file name is humiditytest.csv.
 data_base = 'data_base.txt'
 threshold_temp = 30

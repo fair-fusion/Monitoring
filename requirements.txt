@@ -12,4 +12,6 @@
 \cf2 python-time => 0.3.0\
 os-sys =>2.1.4\
 nbdev=>1.1.23\
+
+Adafruit-DHT=1.4.0
 }
