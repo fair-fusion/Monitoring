@@ -1,10 +1,5 @@
 {
-    "threshold": 25.0,
-    "email": {
-        "from": "your_email@example.com",
-        "to": "recipient_email@example.com",
-        "server": "smtp.example.com"
-    },
-    "fixed_values": ["value1", "value2", "value3"],
-    "batch_number": "Batch-001"
+    "time_interval": 30.0,
+    "threshold_temperature": 25.0,
+    "batch_number": 1
 }

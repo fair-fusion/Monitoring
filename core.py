@@ -4,19 +4,26 @@ import adafruit_dht
 import os
 import csv
 import smtplib  # for email notification (optional)
+import json
 
 class TemperatureMonitor:
-    def __init__(self, pin, time_interval=30.0, threshold_temperature=25.0):
+    def __init__(self, pin, config_file="settings.json"):
+        self.config = self.load_config(config_file)
         self.dhtDevice = adafruit_dht.DHT22(pin)
-        self.time_interval = time_interval
-        self.threshold_temperature = threshold_temperature
+        self.time_interval = self.config["time_interval"]
+        self.threshold_temperature = self.config["threshold_temperature"]
+        self.batch_number = self.config["batch_number"]
         self.csv_file = "data.csv"
+
+    def load_config(self, config_file):
+        with open(config_file, "r") as f:
+            return json.load(f)
 
     def register_temperature(self):
         try:
             temperature_c = self.dhtDevice.temperature
             humidity = self.dhtDevice.humidity
-            current_time = time.strftime("%H:%M:%S")
+            current_time = time.strftime("%Y-%m-%d %H:%M:%S")
             print(f"Temp: {temperature_c:.1f} C    Humidity: {humidity}%    Time: {current_time}")
             return temperature_c, humidity, current_time
         except RuntimeError as error:
@@ -26,7 +33,7 @@ class TemperatureMonitor:
     def log_data(self, temperature_c, humidity, current_time):
         with open(self.csv_file, "a", newline="") as csvfile:
             writer = csv.writer(csvfile)
-            writer.writerow([current_time, temperature_c, humidity])
+            writer.writerow([current_time, temperature_c, humidity, self.batch_number])
 
     def send_notification(self, subject, message):
         # Replace with your email credentials and settings
@@ -56,7 +63,7 @@ class TemperatureMonitor:
         if not os.path.exists(self.csv_file):
             with open(self.csv_file, "w", newline="") as csvfile:
                 writer = csv.writer(csvfile)
-                writer.writerow(["Time", "Temperature (C)", "Humidity (%)"])
+                writer.writerow(["date_time", "Temperature (C)", "Humidity (%)", "Batch Number"])
 
         while True:
             temperature_c, humidity, current_time = self.register_temperature()
@@ -65,15 +72,6 @@ class TemperatureMonitor:
                 self.check_threshold(temperature_c)
 
             time.sleep(self.time_interval)
-
-            # Allow user to adjust the threshold temperature
-            user_input = input("Enter a new threshold temperature (or press Enter to keep current): ")
-            if user_input:
-                try:
-                    self.threshold_temperature = float(user_input)
-                    print(f"Threshold temperature set to {self.threshold_temperature}°C")
-                except ValueError:
-                    print("Invalid input. Please enter a number.")
 
 if __name__ == "__main__":
     monitor = TemperatureMonitor(board.D5)
