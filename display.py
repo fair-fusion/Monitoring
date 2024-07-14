@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 df = pd.read_csv('data.csv', names=['date_time', 'temperature', 'humidity'])
 
 # Convert the date_time column to a date_time object
-df['date_time'] = pd.to_date_time(df['date_time'])
+df['date_time'] = pd.to_datetime(df['date_time'])
 
 # Create new columns for date, time, month, year, and week number
 df['date'] = df['date_time'].dt.date
