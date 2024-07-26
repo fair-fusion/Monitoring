@@ -7,6 +7,10 @@ import smtplib  # for email notification (optional)
 import json
 
 class TemperatureMonitor:
+    """
+    Monitors temperature and humidity and logs data to a csv file.
+    If the temperature exceeds a threshold, sends an email notification. 
+    """
     def __init__(self, pin, config_file="settings.json"):
         self.config = self.load_config(config_file)
         self.dhtDevice = adafruit_dht.DHT22(pin)
@@ -16,10 +20,16 @@ class TemperatureMonitor:
         self.csv_file = "data.csv"
 
     def load_config(self, config_file):
+        """
+        Load file with settings for your process. see settings.json for more details
+        """
         with open(config_file, "r") as f:
             return json.load(f)
 
     def register_temperature(self):
+        """
+        Registers temperature, humidity, and timestamp in a csv file and checks if the temperature exceeds the threshold.
+        """
         try:
             temperature_c = self.dhtDevice.temperature
             humidity = self.dhtDevice.humidity
@@ -31,11 +41,17 @@ class TemperatureMonitor:
             return None, None, None
 
     def log_data(self, temperature_c, humidity, current_time):
+        """
+        
+        """
         with open(self.csv_file, "a", newline="") as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow([current_time, temperature_c, humidity, self.batch_number])
 
     def send_notification(self, subject, message):
+        """
+        Sends an email notification. 
+        """
         # Replace with your email credentials and settings
         sender_email = "your_email@example.com"
         recipient_email = "recipient_email@example.com"
@@ -54,12 +70,18 @@ class TemperatureMonitor:
             print(f"Error sending notification: {e}")
 
     def check_threshold(self, temperature_c):
+        """
+        Checks if the temperature exceeds the threshold. If it does, sends an email notification. The threshold is set in the settings.json file. 
+        """
         if temperature_c > self.threshold_temperature:
             subject = "Temperature Alert!"
             message = f"Temperature is above the threshold ({self.threshold_temperature}°C): {temperature_c:.1f}°C"
             self.send_notification(subject, message)
 
     def run(self):
+        """
+        Creates a csv file if it does not exist yet. The name of the csv file is set in the __init__
+        """
         if not os.path.exists(self.csv_file):
             with open(self.csv_file, "w", newline="") as csvfile:
                 writer = csv.writer(csvfile)

@@ -23,3 +23,8 @@ plt.xlabel('Time')
 plt.ylabel('Temperature (C)')
 plt.title('Temperature Over Time')
 plt.show()
+
+# Create the graph using Seaborn
+sns.set(style="whitegrid")
+plt.figure(figsize=(10,6))
+sns.lineplot(x="date_time", y="humidity", data=df)
