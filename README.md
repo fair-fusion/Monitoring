@@ -25,23 +25,8 @@ Install some dependencies by running:
 To register the readings in a csv file, run the following in your terminal `python3 monitor_store.py`
 To get simply readings in your terminal, run `python3 monitor.py`
 
-# Requirements
-csv - DONE
-#Batchnummer (1 tot n)
-#datum, tijd, elke 20 seconden (of inteval logging instelbaar manueel) - DONE
-#temperatuur extern (omgeving), humiditeit - DONE
-#teperatuur tank
-#gewicht tank (comport)
-#status verwarming (instellen manueel)
-#rpm motor - sensor via comport
-#status aanvoer kraan (aan of uit, manueel instellen)
-
-#centrifugeren
-#doseren (instel waarde (e.g., 4l per uur))
-#daadwerkelijke dosis (meet via comport)
-#centrifuge (aan/uit)
-
 ## Installation of This Repo
+This code is written for usage on a raspberry pi (Linux OS).
 Create a virtual environment in your repo by running the following command in the terminal of the Rapsberry Pi:
 'python -m venv' 
 
