@@ -26,6 +26,7 @@ To register the readings in a csv file, run the following in your terminal `pyth
 To get simply readings in your terminal, run `python3 monitor.py`
 
 ## Installation of This Repo
+This code is written for usage on a raspberry pi (Linux OS).
 Create a virtual environment in your repo by running the following command in the terminal of the Rapsberry Pi:
 'python -m venv' 
 
