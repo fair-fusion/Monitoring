@@ -1,6 +1,23 @@
 # Script code for a Python server that exposes an API endpoint to fetch the temperature data from the sensor 
 # reader script. The data is constantly written to a csv file called data.csv. 
 # This server will handle incoming requests from the React app and return the temperature data.
+
+    """
+    This code defines two API endpoints:
+
+    /temperature: Returns the latest temperature reading as a JSON object.
+    /temperature/history: Returns the historical temperature readings as a JSON array of objects.
+
+The load_data() function loads the data from the data.csv file using pandas. If the file does not exist, it returns None.
+
+The get_temperature() function loads the data and returns the latest temperature reading as a JSON object. If no data is available, it returns a 404 error.
+
+The get_temperature_history() function loads the data and returns the historical temperature readings as a JSON array of objects. If no data is available, it returns a 404 error.
+
+You can run this server by saving this code to a file (e.g. server.py) and running it with python server.py. Then, you can access the API endpoints by visiting http://localhost:5000/temperature or http://localhost:5000/temperature/history in your web browser.
+
+Note that this is just an example, and you may need to modify it to fit your specific use case. Additionally, you should consider implementing authentication and authorization mechanisms to secure your API endpoints.
+    """
 import pandas as pd
 from flask import Flask, jsonify
 

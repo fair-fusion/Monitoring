@@ -1,3 +1,4 @@
+#all the necessary functions to monitor temperature and send notifcations. This comes together in monitor_store.py 
 import time
 import board
 import adafruit_dht
