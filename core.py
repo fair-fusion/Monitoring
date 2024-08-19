@@ -19,6 +19,13 @@ class TemperatureMonitor:
         self.threshold_temperature = self.config["threshold_temperature"]
         self.batch_number = self.config["batch_number"]
         self.csv_file = os.path.join("../data", "data.csv")
+        if not os.path.exists(self.csv_file):
+            data_folder = os.path.dirname(self.csv_file)
+            if not os.path.exists(data_folder):
+                os.makedirs(data_folder)
+                with open(self.csv_file, "w", newline="") as csvfile:
+                    writer = csv.writer(csvfile)
+                    writer.writerow(["date_time", "Temperature (C)", "Humidity (%)", "Batch Number"])
 
     def load_config(self, config_file):
         """
