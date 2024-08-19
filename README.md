@@ -24,7 +24,7 @@ create a venvironment in your repo by running the following command in the termi
 ### Download the Fair-Fusion Repository
 `git clone https://github.com/fair-fusion/Monitoring.git`
 
-Go to the relevant folder by using cd: `cd Software/monitoring`
+Go to the relevant folder by using cd: `cd Monitoring`
 
 Install some dependencies by running:
 `pip install -r requirements.txt`
