@@ -4,7 +4,7 @@ import board
 import adafruit_dht
 import os
 import csv
-import smtplib  # for email notification (optional)
+import smtplib
 import json
 
 class TemperatureMonitor:
@@ -18,7 +18,7 @@ class TemperatureMonitor:
         self.time_interval = self.config["time_interval"]
         self.threshold_temperature = self.config["threshold_temperature"]
         self.batch_number = self.config["batch_number"]
-        self.csv_file = "data.csv"
+        self.csv_file = os.path.join("../data", "data.csv")
 
     def load_config(self, config_file):
         """
