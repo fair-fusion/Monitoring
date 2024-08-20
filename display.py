@@ -3,7 +3,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Read the CSV file into a Pandas DataFrame
-df = pd.read_csv('data.csv', names=['date_time', 'Temperature (C)', 'Humidity (%)', 'Batch Number'])
+df = pd.read_csv('data.csv', header=None, names=['date_time', 'Temperature (C)', 'Humidity (%)', 'Batch Number'])
 
 # Convert the date_time column to a date_time object
 df['date_time'] = pd.to_datetime(df['date_time'])
