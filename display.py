@@ -3,7 +3,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Read the CSV file into a Pandas DataFrame
-df = pd.read_csv('data.csv', names=['date_time', 'temperature', 'humidity'])
+df = pd.read_csv('data.csv', names=['date_time', 'Temperature (C)', 'Humidity (%)', 'Batch Number'])
 
 # Convert the date_time column to a date_time object
 df['date_time'] = pd.to_datetime(df['date_time'])
@@ -18,7 +18,7 @@ df['week'] = df['date_time'].dt.week
 # Create the graph using Seaborn
 sns.set(style="whitegrid")
 plt.figure(figsize=(10,6))
-sns.lineplot(x="date_time", y="temperature", data=df)
+sns.lineplot(x="date_time", y="Temperature (C)", data=df)
 plt.xlabel('Time')
 plt.ylabel('Temperature (C)')
 plt.title('Temperature Over Time')
@@ -27,4 +27,8 @@ plt.show()
 # Create the graph using Seaborn
 sns.set(style="whitegrid")
 plt.figure(figsize=(10,6))
-sns.lineplot(x="date_time", y="humidity", data=df)
+sns.lineplot(x="date_time", y="Humidity (%)", data=df)
+plt.xlabel('Time')
+plt.ylabel('Humidity (%)')
+plt.title('Humidity Over Time')
+plt.show()
