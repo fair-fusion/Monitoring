@@ -41,7 +41,8 @@ class TemperatureMonitor:
         try:
             temperature_c = self.dhtDevice.temperature
             humidity = self.dhtDevice.humidity
-            current_time = time.strftime("%Y-%m-%d %H:%M:%S")
+            current_time = time.strftime("YYYY-MM-DD HH:MM:SS")
+            #current_time = time.strftime("%Y-%m-%d %H:%M:%S")
             print(f"Temp: {temperature_c:.1f} C    Humidity: {humidity}%    Time: {current_time}")
             return temperature_c, humidity, current_time
         except RuntimeError as error:
