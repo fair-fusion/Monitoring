@@ -44,10 +44,11 @@ class TemperatureMonitor:
             humidity = self.dhtDevice.humidity
             current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             print(f"Temp: {temperature_c:.1f} C    Humidity: {humidity}%    Time: {current_time}")
-            return temperature_c, humidity, current_time
+            exceeded_threshold = temperature_c > self.threshold_temperature
+            return temperature_c, humidity, current_time, exceeded_threshold
         except RuntimeError as error:
             print(error.args[0])
-            return None, None, None
+            return None, None, None, False
 
     def log_data(self, temperature_c, humidity, current_time):
         """
@@ -97,10 +98,15 @@ class TemperatureMonitor:
                 writer.writerow(["date_time", "Temperature (C)", "Humidity (%)", "Batch Number"])
 
         while True:
-            temperature_c, humidity, current_time = self.register_temperature()
+            temperature_c, humidity, current_time, exceeded_threshold = self.register_temperature()
             if temperature_c is not None:
                 self.log_data(temperature_c, humidity, current_time)
-                self.check_threshold(temperature_c)
+                if exceeded_threshold:
+                    subject = "Temperature Alert!"
+                    message = f"Temperature is above the threshold ({self.threshold_temperature}°C): {temperature_c:.1f}°C"
+                    self.send_notification(subject, message)
+                    print(f"Temperature alert! Temperature is above the threshold: {temperature_c:.1f}°C")
+
 
             time.sleep(self.time_interval)
 
